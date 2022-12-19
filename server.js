@@ -7,6 +7,7 @@ const sql = postgres({database:"dealership"});
 const app = express();
 const port = 3000;
 
+dotenv.config();
 app.use(express.json());
 app.use(express.static("client"));
 
@@ -57,6 +58,7 @@ app.get("/api/sales", (req, res)=>{
 /************************************************** Add Customer **************************************************/
 app.post("/api/customer", (req, res)=>{
     const {first_name, last_name, phone} = req.body;
+    console.log("Request body is ",req.body);
     sql `INSERT INTO customer ${sql(req.body)} RETURNING *`
     //sql `INSERT INTO customer (firstname, lastname, phone) values (${first_name}, ${last_name}, ${phone}) RETURNING *`
     .then((results)=>{
