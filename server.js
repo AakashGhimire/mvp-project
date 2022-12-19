@@ -3,8 +3,8 @@ import nodemon from "nodemon";
 import postgres from "postgres";
 import dotenv from "dotenv";
 
-//const sql = postgres({database:"dealership"});
-const sql = postgres("postgres://aakashgh:wYxXdSakRmhG8hDdyVqfomhMjrvN7K9r@dpg-ceee19ha6gds30adlp80-a.oregon-postgres.render.com/dealership?ssl=true");
+const sql = postgres({database:"dealership"});
+//const sql = postgres("postgres://aakashgh:wYxXdSakRmhG8hDdyVqfomhMjrvN7K9r@dpg-ceee19ha6gds30adlp80-a.oregon-postgres.render.com/dealership?ssl=true");
 const app = express();
 const port = 3000;
 
