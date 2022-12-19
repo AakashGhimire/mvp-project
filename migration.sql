@@ -9,7 +9,7 @@ CREATE TABLE customer
   id        SERIAL   PRIMARY KEY,
   firstName TEXT    ,
   lastName  TEXT    ,
-  phone     char(10)
+  phone     char(10) UNIQUE
 );
 
 CREATE TABLE employee
@@ -17,7 +17,7 @@ CREATE TABLE employee
   id        SERIAL   PRIMARY KEY,
   firstName TEXT    ,
   lastName  TEXT    ,
-  phone     char(10)
+  phone     char(10) UNIQUE
 );
 
 CREATE TABLE vehicle

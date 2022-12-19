@@ -38,5 +38,10 @@
 --         values
 --         (6, 6, 1);
 
+insert into newCustomer
+    (firstName, lastName, phone)
+        values 
+        ('Preston', 'Barrett', '9182768161' ),
+        ('Patrick', 'Miller', '9182768162');
 
 
