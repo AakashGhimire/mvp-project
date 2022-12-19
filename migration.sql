@@ -25,7 +25,9 @@ CREATE TABLE vehicle
   id    SERIAL     PRIMARY KEY,
   make  TEXT      ,
   model TEXT      ,
-  year  char(4)
+  year  char(4),
+  price MONEY,
+  sold  BOOLEAN
 );
 
 CREATE TABLE sales
@@ -33,8 +35,7 @@ CREATE TABLE sales
   id          SERIAL  PRIMARY KEY,
   employee_id INTEGER REFERENCES employee(id),
   customer_id INTEGER REFERENCES customer(id),
-  vehicle_id  INTEGER REFERENCES vehicle(id), 
-  price       MONEY
+  vehicle_id  INTEGER REFERENCES vehicle(id)
    
 );
 

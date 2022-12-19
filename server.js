@@ -41,7 +41,7 @@ app.get("/api/sales", (req, res)=>{
         sales.id,
         concat(customer.firstName,' ', customer.lastName) as Customer_Name,
         concat(employee.firstName,' ', employee.lastName) as Employee_Name,
-        vehicle.make, vehicle.model, vehicle.year, sales.price
+        vehicle.make, vehicle.model, vehicle.year, vehicle.price
         FROM customer 
         JOIN sales
         ON sales.customer_id = customer.id
@@ -85,12 +85,20 @@ app.post("/api/vehicle", (req, res)=>{
     });
 });
 
-/************************************************** Add Sales **************************************************/
+/************************************************** Purchase Vehicle - Update Sales table **************************************************/
 app.post("/api/sales", (req, res)=>{
     sql `INSERT INTO sales ${sql(req.body)} RETURNING *`
     .then((results)=>{
         res.json(results[0]);
     });
+
+    // app.get("/api/sales", (req, res)=>{
+    //     sql `select * from sales`
+    //     .then((result)=>{
+    //         res.json(result);
+    //     })
+    // })
+    
 });
 
 /************************************************** Update Customer's Info **************************************************/
@@ -163,13 +171,13 @@ app.patch("/api/sales/:id", (req, res)=>{
 })
 
 /************************************************** Delete Customer's Info **************************************************/
-// app.delete("/api/customer/:id", (req, res)=>{
-//     const id = req.params.id;
-//     sql `DELETE FROM customer WHERE id = ${id} RETURNING *`
-//     .then((results)=>{
-//         res.json(results[0]);
-//     });
-// })
+app.delete("/api/customer/:id", (req, res)=>{
+    const id = req.params.id;
+    sql `DELETE FROM customer WHERE id = ${id} RETURNING *`
+    .then((results)=>{
+        res.json(results[0]);
+    });
+})
 
 /************************************************** Delete Vehicles's Info **************************************************/
 
