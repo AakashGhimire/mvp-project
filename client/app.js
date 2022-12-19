@@ -25,7 +25,7 @@ displayCustomer.addEventListener("click", ()=>{ //Click on Customer button
         let submit = false;
         customerData(submit);
     }   
-    else if(customer_toggled){ //runs when toggle is set to true. this will toggle off the customer table
+    else if(customer_toggled){ //runs when toggle = true, and will toggle off the customer table
         customer_toggled = false;
         const table = document.getElementById("customer_table"); 
         customer_div.append(table);
@@ -34,12 +34,12 @@ displayCustomer.addEventListener("click", ()=>{ //Click on Customer button
     }
 });
 
-//customerData() function creates table header and table rows dynamically
+//this function creates table header and table rows dynamically when Customer button is clicked
 function customerData(submit){
     const table = document.getElementById("customer_table"); 
     customer_div.append(table);
 
-    fetch("/api/customer") //fetches customer api
+    fetch("/api/customer")
     .then((res)=>res.json())
     .then((data)=>{
         console.log(data);
@@ -74,7 +74,7 @@ function customerData(submit){
 
        /************************* Add Customer Button *************************/
        if (submit === false){
-        console.log("value of submit2",submit);
+        console.log("value of submit",submit);
         addCustomer();
        }
        
