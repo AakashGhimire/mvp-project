@@ -7,8 +7,8 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
-//const sql = postgres({database:"dealership"});
-const sql = postgres(process.env.DATABASE_URL);
+const sql = postgres({database:"dealership"});
+//const sql = postgres(process.env.DATABASE_URL);
 
 app.use(express.json());
 app.use(express.static("client"));
@@ -39,6 +39,7 @@ app.get("/api/vehicle", (req, res)=>{
 
 /************************************************** Get Sales **************************************************/
 app.get("/api/sales", (req, res)=>{
+
     sql `select
         sales.id,
         concat(customer.firstName,' ', customer.lastName) as Customer_Name,
@@ -51,6 +52,7 @@ app.get("/api/sales", (req, res)=>{
         ON employee.id = sales.employee_id
         JOIN vehicle
         ON vehicle.id = sales.vehicle_id
+        where vehicle.sold = 'true'
         order by sales.id
         `
     .then((result)=>{
@@ -91,6 +93,13 @@ app.post("/api/vehicle", (req, res)=>{
 
 /************************************************** Purchase Vehicle - Update Sales table **************************************************/
 app.post("/api/sales", (req, res)=>{
+    const {employee_id, customer_id, vehicle_id} = req.body;
+    console.log("Vehicle ID that is sold - ", vehicle_id);
+    sql`UPDATE vehicle set sold = 'true' where id = ${vehicle_id}`
+    .then((results)=>{
+        console.log("results of updating vehicle table ",results[0]);
+    })
+
     sql `INSERT INTO sales ${sql(req.body)} RETURNING *`
     .then((results)=>{
         res.json(results[0]);
