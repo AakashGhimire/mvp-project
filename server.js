@@ -44,7 +44,8 @@ app.get("/api/sales", (req, res)=>{
         sales.id,
         concat(customer.firstName,' ', customer.lastName) as Customer_Name,
         concat(employee.firstName,' ', employee.lastName) as Employee_Name,
-        vehicle.make, vehicle.model, vehicle.year, vehicle.price
+        concat(vehicle.make,' ', vehicle.model,' ',vehicle.year) as Vehicle,
+        vehicle.price
         FROM customer 
         JOIN sales
         ON sales.customer_id = customer.id
@@ -95,16 +96,16 @@ app.post("/api/vehicle", (req, res)=>{
 app.post("/api/sales", (req, res)=>{
     const {employee_id, customer_id, vehicle_id} = req.body;
     console.log("Vehicle ID that is sold - ", vehicle_id);
+    sql `INSERT INTO sales ${sql(req.body)} RETURNING *`
+    .then((results)=>{
+        console.log(results[0]);
+        res.json(results[0]);
+    })
+    //this sql query sets sold value as true to remove it from the vehicle inventory
     sql`UPDATE vehicle set sold = 'true' where id = ${vehicle_id}`
     .then((results)=>{
         //console.log("results of updating vehicle table ",results[0]);
     })
-
-    sql `INSERT INTO sales ${sql(req.body)} RETURNING *`
-    .then((results)=>{
-        res.json(results[0]);
-    });
-
     // app.get("/api/sales", (req, res)=>{
     //     sql `select * from sales`
     //     .then((result)=>{

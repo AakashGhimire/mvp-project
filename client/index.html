@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dealership</title>
+    <title>Fort Campbell Auto Sales</title>
     <script defer src = "app.js" ></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Dealership</h1>
+    <h1>Fort Campbell Auto Sales</h1>
     
     <div class="topnav">
         <a href="#home" id = "displayCustomer">
@@ -40,7 +40,7 @@
                 <label for="last_name">Last Name</label>
                     <input type="text" id="cust_lastName" placeholder="Last Name" required/><br>
                 <label for="phone">Phone Number</label>
-                    <input type="tel" id="cust_phone" placeholder="Phone Number" required/><br>
+                    <input type="tel" id="cust_phone" placeholder="Phone Number" pattern=".{10}" title="Field must be 10 characters long" required/><br>
                 <button type="submit" id="submitCustomerInfo">Submit Customer Info</button>
             </form>
             <table id = "customer_table" class = "table_class">
@@ -56,7 +56,7 @@
                 <label for="last_name">Last Name</label>
                     <input type="text" id="employee_lastName" placeholder="Last Name" required/><br>
                 <label for="phone">Phone Number</label>
-                    <input type="tel" id="employee_phone" placeholder="Phone Number" required/><br>
+                    <input type="tel" id="employee_phone" placeholder="Phone Number" pattern=".{10}" title="Field must be 10 characters long" required/><br>
                 <button type="submit" id="submitEmployeeInfo">Submit Employee Info</button>
             </form>
             <table id = "employee_table" class = "table_class">

@@ -1,14 +1,17 @@
 const customer_div = document.getElementById("customer-div-id");
 const displayCustomer = document.getElementById(`displayCustomer`);
 const addCustomer_div = document.getElementById("addCustomer_div");
+const customer_form = document.getElementById("addCustomerForm");
 
 const displayEmployee = document.getElementById("displayEmployee");
 const employee_div = document.getElementById("employee-div-id");
 const addEmployee_div = document.getElementById("addEmployee_div");
+const employee_form = document.getElementById("addEmployeeForm");
 
 const displayVehicle = document.getElementById("displayVehicle");
 const vehicle_div = document.getElementById("vehicle-div-id");
 const addVehicle_div = document.getElementById("addVehicle_div");
+const vehicle_form = document.getElementById("addVehicleForm");
 
 const displaySales = document.getElementById("displaySales");
 const sales_div = document.getElementById("sales-div-id");
@@ -20,19 +23,24 @@ const purchase_inner_div = document.getElementById("purchase_div");
 /************************************************************ Customer Button Functionality ************************************************************/
 var customer_toggled = false;
 displayCustomer.addEventListener("click", ()=>{ //Click on Customer button
-    //document.querySelector("#customer-div-id").hidden = false;
+    customer_div.hidden = false;
+    employee_div.hidden = true;
+    vehicle_div.hidden = true;
+    sales_div.hidden = true;
+    purchase_div.hidden = true;
+
+    if(customer_form.hidden === false){
+        customer_form.hidden = true;
+    } 
     if(!customer_toggled){ //runs when toggle is false for the first time
-        
         customer_toggled = true;
         let submit = false;
         customerData(submit);
     }   
     else if(customer_toggled){ //runs when toggle = true, and will toggle off the customer table
-        
         customer_toggled = false;
         const table = document.getElementById("customer_table"); 
         customer_div.append(table);
-        
         addCustomer_div.innerHTML= " ";
         table.innerHTML = " ";
     }
@@ -46,8 +54,6 @@ function customerData(submit){
     .then((res)=>res.json())
     .then((data)=>{
         console.log(data);
-      //  document.querySelector("#addCustomerForm").innerHTML=`<h2 class="tableName">Customer</h2>`
-
         table.innerHTML = ` 
             <thead>
                 <tr>
@@ -56,9 +62,8 @@ function customerData(submit){
                     <th>Last Name</th>
                     <th>Phone</th>
                 </tr>
-            </thead>
-        `;
-        //for each element of returned api, it will create table data(rows)
+            </thead>`;
+        //for each element of returned api, this will create table data(rows)
         for (let key in data){
             let id = data[key]["id"];
             let firstName = data[key]["firstname"];
@@ -84,7 +89,7 @@ function customerData(submit){
         addCustomerbtn.innerHTML = "Add Customer";
         addCustomerbtn.addEventListener("click",(event)=>{ //Click on Add Customer button
             //console.log("Add Customer button is clicked");
-            const customer_form = document.getElementById("addCustomerForm");
+            //const customer_form = document.getElementById("addCustomerForm");
             if(customer_form.hidden === true){
                 customer_form.hidden = false;
             } else{
@@ -94,7 +99,6 @@ function customerData(submit){
        }
        //addCustomer function only displays the entry form if submit is false
        if (submit === false){
-        //console.log("value of submit",submit);
         addCustomer();
        }
     });
@@ -130,11 +134,18 @@ function customerData(submit){
 /************************************************** Employee Button Functionality **************************************************/
 var employee_toggled = false;
 displayEmployee.addEventListener("click", ()=>{
-    //document.querySelector("#customer-div-id").hidden = true;
+    customer_div.hidden = true;
+    employee_div.hidden = false;
+    vehicle_div.hidden = true;
+    sales_div.hidden = true;
+    purchase_div.hidden = true;
+
+    if(employee_form.hidden === false){
+        employee_form.hidden = true;
+    }
     if(!employee_toggled){ //runs when toggle is false for the first time
         employee_toggled = true;
         let submit = false;
-
         employeeData(submit);     
     }   
     else if(employee_toggled){ //runs when toggle is set to true. this will toggle off the customer table
@@ -195,11 +206,11 @@ function employeeData(submit){
                 addEmployeebtn.addEventListener("click",(event)=>{ //Click on Add Employee button
                     //console.log("Add button is clicked");
                     //event.preventDefault();
-                    const form = document.getElementById("addEmployeeForm");
-                    if(form.hidden === true){
-                        form.hidden = false;
+                    
+                    if(employee_form.hidden === true){
+                        employee_form.hidden = false;
                     } else{
-                        form.hidden = true;
+                        employee_form.hidden = true;
                     }               
                 });
             }
@@ -239,6 +250,15 @@ createEmployee.addEventListener("submit", (event)=>{
 /************************************************** Vehicle Button Functionality **************************************************/
 var vehicle_toggled = false;
 displayVehicle.addEventListener("click", ()=>{
+    customer_div.hidden = true;
+    employee_div.hidden = true;
+    vehicle_div.hidden = false;
+    sales_div.hidden = true;
+    purchase_div.hidden = true;
+
+    if(vehicle_form.hidden === false){
+        vehicle_form.hidden = true;
+    }
     if(!vehicle_toggled){ //runs when toggle is false for the first time
         vehicle_toggled = true;
         let submit = false;
@@ -302,11 +322,11 @@ function vehicleData(submit){
                     addVehiclebtn.innerHTML = "Add Vehicle";
                     addVehiclebtn.addEventListener("click",(event)=>{ //Click on Add Employee button
                         //console.log("Add vehicle button is clicked");
-                        const form = document.getElementById("addVehicleForm");
-                        if(form.hidden === true){
-                            form.hidden = false;
+                        
+                        if(vehicle_form.hidden === true){
+                            vehicle_form.hidden = false;
                         } else{
-                            form.hidden = true;
+                            vehicle_form.hidden = true;
                         }
                     });
                }
@@ -349,6 +369,12 @@ createVehicle.addEventListener("submit", (event)=>{
 /************************************************** Sales Button Functionality **************************************************/
 var sales_toggled = false;
 displaySales.addEventListener("click", ()=>{
+    customer_div.hidden = true;
+    employee_div.hidden = true;
+    vehicle_div.hidden = true;
+    sales_div.hidden = false;
+    purchase_div.hidden = true;
+
     if(!sales_toggled){ //runs when toggle is false for the first time
         sales_toggled = true;
         const table = document.getElementById("sales_table"); 
@@ -364,9 +390,7 @@ displaySales.addEventListener("click", ()=>{
                             <th>ID</th>
                             <th>Customer Name</th>
                             <th>Employee Name</th>
-                            <th>Make</th>
-                            <th>Model</th>
-                            <th>Year</th>
+                            <th>Vehicle</th>
                             <th>Price</th>
                         </tr>
                     </thead>
@@ -376,9 +400,11 @@ displaySales.addEventListener("click", ()=>{
                     let id = data[key]["id"];
                     let customer_name = data[key]["customer_name"];
                     let employee_name = data[key]["employee_name"];
-                    let make = data[key]["make"];
-                    let model = data[key]["model"];
-                    let year = data[key]["year"];
+                    let vehicle = data[key]["vehicle"];
+
+                    //let make = data[key]["make"];
+                    //let model = data[key]["model"];
+                    //let year = data[key]["year"];
                     let price = data[key]["price"];
                     table.innerHTML +=`
                         <tbody id = "employeeTB" class="employeeTB">
@@ -386,9 +412,7 @@ displaySales.addEventListener("click", ()=>{
                                 <td>${id}</td>
                                 <td>${customer_name}</td>
                                 <td>${employee_name}</td>
-                                <td>${make}</td>
-                                <td>${model}</td>
-                                <td>${year}</td>
+                                <td>${vehicle}</td>
                                 <td>${price}</td>
                             </tr> 
                         </tbody>
@@ -408,6 +432,12 @@ displaySales.addEventListener("click", ()=>{
 /************************************************** Purchase Button Functionality **************************************************/
 var purchase_toggled = false;
 displayPurchase.addEventListener("click", ()=>{
+    customer_div.hidden = true;
+    employee_div.hidden = true;
+    vehicle_div.hidden = true;
+    sales_div.hidden = true;
+    purchase_div.hidden = false;
+
     const purchaseForm = document.getElementById("purchaseForm");
     if(!purchase_toggled){ //runs when toggle is false for the first time
         purchase_toggled = true;
@@ -440,5 +470,8 @@ createPurchase.addEventListener("submit", (event)=>{
         },
         method: "POST",
         body: JSON.stringify(newPurchase)
-    });
+    })
+    // .then(()=>{
+    //     alert("Purchase Successful!");
+    // });
 })
