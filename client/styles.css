@@ -1,0 +1,91 @@
+h1{
+    text-align: center;
+    color: white;
+}
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #0d0f4a;
+    color: white;
+}
+
+.div-body{
+    margin-left: 20px;
+}
+  
+.topnav {
+    overflow: hidden;
+    background-color: #ef6e47;
+}
+  
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-size: 17px;
+    color: white;
+}
+  
+.topnav a:hover {
+    background-color: #e0eaf8;
+    color: black;
+}
+  
+.topnav a.active {
+    background-color: #e0eaf8;
+    color: white;
+}
+
+#deleteBtnId{
+    display: none;
+}
+
+.tableName{
+    text-align: center;
+}
+
+button {
+    display: inline-block;
+    padding: 5px 9px;
+    font-size: 17px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    background-color: #e0eaf8;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 3px #999;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+  button:hover {background-color: #ef6e47}
+  
+  button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  label {
+    display: inline-block;
+    width: 110px;
+
+  }
+  input,select {
+    padding: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  th, td {
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #ef6e47;
+    padding: 10px;
+
+  }

@@ -20,15 +20,19 @@ const purchase_inner_div = document.getElementById("purchase_div");
 /************************************************************ Customer Button Functionality ************************************************************/
 var customer_toggled = false;
 displayCustomer.addEventListener("click", ()=>{ //Click on Customer button
+    //document.querySelector("#customer-div-id").hidden = false;
     if(!customer_toggled){ //runs when toggle is false for the first time
+        
         customer_toggled = true;
         let submit = false;
         customerData(submit);
     }   
     else if(customer_toggled){ //runs when toggle = true, and will toggle off the customer table
+        
         customer_toggled = false;
         const table = document.getElementById("customer_table"); 
         customer_div.append(table);
+        
         addCustomer_div.innerHTML= " ";
         table.innerHTML = " ";
     }
@@ -42,6 +46,8 @@ function customerData(submit){
     .then((res)=>res.json())
     .then((data)=>{
         console.log(data);
+      //  document.querySelector("#addCustomerForm").innerHTML=`<h2 class="tableName">Customer</h2>`
+
         table.innerHTML = ` 
             <thead>
                 <tr>
@@ -65,10 +71,10 @@ function customerData(submit){
                         <td>${firstName}</td>
                         <td>${lastName}</td>
                         <td>${phone}</td>
-                        <td><button id = "deleteBtnId" class = "deleteBtn">Delete</td>
                     </tr> 
                 </tbody>
             `
+            //<td><button id = "deleteBtnId" class = "deleteBtn">Delete</td>
         }
        /************************* Add Customer Button *************************/
        //this function displays customer entry form when Add Customer button is clicked
@@ -124,17 +130,21 @@ function customerData(submit){
 /************************************************** Employee Button Functionality **************************************************/
 var employee_toggled = false;
 displayEmployee.addEventListener("click", ()=>{
+    //document.querySelector("#customer-div-id").hidden = true;
     if(!employee_toggled){ //runs when toggle is false for the first time
         employee_toggled = true;
         let submit = false;
+
         employeeData(submit);     
     }   
     else if(employee_toggled){ //runs when toggle is set to true. this will toggle off the customer table
         employee_toggled = false;
         const table = document.getElementById("employee_table"); 
         employee_div.append(table);
+        
         addEmployee_div.innerHTML= " ";
         table.innerHTML = " ";
+        
     }
 });
 
@@ -172,10 +182,10 @@ function employeeData(submit){
                             <td>${firstName}</td>
                             <td>${lastName}</td>
                             <td>${phone}</td>
-                            <td><button id = "deleteBtnId" class = "deleteBtn">Delete</td>
                         </tr> 
                     </tbody>
                 `
+                //<td><button id = "deleteBtnId" class = "deleteBtn">Delete</td>
             }
             /************************* Add Employee Button *************************/
             function addEmployee(){
@@ -279,10 +289,10 @@ function vehicleData(submit){
                                 <td>${model}</td>
                                 <td>${year}</td>
                                 <td>${price}</td>
-                                <td><button id = "deleteBtnId" class = "deleteBtn">Delete</td>
                             </tr> 
                         </tbody>
                     `
+                    //<td><button id = "deleteBtnId" class = "deleteBtn">Delete</td>
                     } 
                 }
                 /************************* Add Vehicle Button *************************/
@@ -380,10 +390,10 @@ displaySales.addEventListener("click", ()=>{
                                 <td>${model}</td>
                                 <td>${year}</td>
                                 <td>${price}</td>
-                                <td><button id = "deleteBtnId" class = "deleteBtn">Delete</td>
                             </tr> 
                         </tbody>
                     `
+                    //<td><button id = "deleteBtnId" class = "deleteBtn">Delete</td>
                 }
             });
     }   

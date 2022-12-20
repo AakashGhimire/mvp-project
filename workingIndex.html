@@ -12,7 +12,7 @@
     <h1>Dealership</h1>
     
     <div class="topnav">
-        <a href="#home" id = "displayCustomer">
+        <a class="active" href="#home" id = "displayCustomer">
             Customer
         </a>
         <a href="#news" id = "displayEmployee">
@@ -30,9 +30,8 @@
     </div>
 
     <!-------------------------------------------------- Customer -------------------------------------------------->
-    <div class = "div-body">
     <div id = "customer-div-id" class = "customer-class">
-        <!-- <button id = "displayCustomer">Customer</button> -->
+        <button id = "displayCustomer">Customer</button>
         <div id = "addCustomer_div"></div>
             <form id="addCustomerForm" hidden>
                 <label for="first_name">First Name</label>
@@ -48,7 +47,7 @@
     </div>
     <!-------------------------------------------------- Employee -------------------------------------------------->
     <div id="employee-div-id"  class = "employee-class">
-        <!-- <button id = "displayEmployee">Employee</button> -->
+        <button id = "displayEmployee">Employee</button>
         <div id = "addEmployee_div"></div>
             <form id="addEmployeeForm" hidden>
                 <label for="first_name">First Name</label>
@@ -65,7 +64,7 @@
 
     <!-------------------------------------------------- Vehicle -------------------------------------------------->
     <div id = "vehicle-div-id" class = "vehicle-class">
-        <!-- <button id = "displayVehicle"> Vehicle</button> -->
+        <button id = "displayVehicle"> Vehicle</button>
         <div id = "addVehicle_div"></div>
             <form id="addVehicleForm" hidden>
                 <label for="make">Make</label>
@@ -94,14 +93,14 @@
 
     <!-------------------------------------------------- Sales -------------------------------------------------->
     <div id = "sales-div-id" class = "sales-class">
-        <!-- <button id = "displaySales">Sales</button> -->
+        <button id = "displaySales">Sales</button>
             <table id = "sales_table" class = "table_class">
             </table>
     </div>
 
     <!-------------------------------------------------- Purchase Vehicle -------------------------------------------------->
     <div id = "purchaseVehicle-div-id" class = "purchaseVehicle-class">
-        <!-- <button id = "displayPurchaseVehicle"> Purchase Vehicle</button> -->
+        <button id = "displayPurchaseVehicle"> Purchase Vehicle</button>
         <div id = "purchase_div"></div>
             <form id="purchaseForm" hidden>
                 <label for="employee_id">Employee ID</label>
@@ -114,7 +113,6 @@
             </form>
             <table id = "purchaseVehicle_table" class = "table_class">
             </table>
-    </div>
     </div>
         
 </body>
