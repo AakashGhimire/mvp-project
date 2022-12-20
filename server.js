@@ -7,8 +7,8 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
-const sql = postgres({database:"dealership"});
-//const sql = postgres(process.env.DATABASE_URL);
+//const sql = postgres({database:"dealership"});
+const sql = postgres(process.env.DATABASE_URL);
 
 app.use(express.json());
 app.use(express.static("client"));
