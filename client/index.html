@@ -55,7 +55,7 @@
                 <label for="year">Year</label>
                     <select type="year" id="vehicle_year" placeholder="Year" max-length = "4" required>
                         <script>
-                            for(let i=1990; i<=2023; i++){
+                            for(let i=2023; i>=1990; i--){
                                 var select = document.getElementById("vehicle_year");
                                 var option = document.createElement("option");
                                 select.append(option);

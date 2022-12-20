@@ -38,7 +38,6 @@ displayCustomer.addEventListener("click", ()=>{ //Click on Customer button
 function customerData(submit){
     const table = document.getElementById("customer_table"); 
     customer_div.append(table);
-
     fetch("/api/customer")
     .then((res)=>res.json())
     .then((data)=>{
@@ -71,7 +70,6 @@ function customerData(submit){
                 </tbody>
             `
         }
-
        /************************* Add Customer Button *************************/
        //this function displays customer entry form when Add Customer button is clicked
        function addCustomer(){
@@ -129,9 +127,7 @@ displayEmployee.addEventListener("click", ()=>{
     if(!employee_toggled){ //runs when toggle is false for the first time
         employee_toggled = true;
         let submit = false;
-        employeeData(submit);
-        
-            
+        employeeData(submit);     
     }   
     else if(employee_toggled){ //runs when toggle is set to true. this will toggle off the customer table
         employee_toggled = false;
@@ -144,46 +140,45 @@ displayEmployee.addEventListener("click", ()=>{
 
 function employeeData(submit){
     const table = document.getElementById("employee_table"); 
-        employee_div.append(table);
-        fetch("/api/employee") //fetches customer api
-            .then((res)=>res.json())
-            .then((data)=>{
-                console.log(data);
-                // const addEmployeebtn = document.createElement("button");
-                // addEmployee_div.append(addEmployeebtn)
-                // addEmployeebtn.innerHTML = "Add Employee";
-
-                //creates table headers for the customers table
-                table.innerHTML = ` 
-                    <thead>
+    employee_div.append(table);
+    fetch("/api/employee") //fetches customer api
+        .then((res)=>res.json())
+        .then((data)=>{
+            console.log(data);
+            // const addEmployeebtn = document.createElement("button");
+            // addEmployee_div.append(addEmployeebtn)
+            // addEmployeebtn.innerHTML = "Add Employee";
+            //creates table headers for the customers table
+            table.innerHTML = ` 
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+            `;
+            //for each element of returned api, it will create table data(rows)
+            for (let key in data){
+                let id = data[key]["id"];
+                let firstName = data[key]["firstname"];
+                let lastName = data[key]["lastname"];
+                let phone = data[key]["phone"];
+                table.innerHTML +=`
+                    <tbody id = "employeeTB" class="employeeTB">
                         <tr>
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Phone</th>
-                        </tr>
-                    </thead>
-                `;
-                //for each element of returned api, it will create table data(rows)
-                for (let key in data){
-                    let id = data[key]["id"];
-                    let firstName = data[key]["firstname"];
-                    let lastName = data[key]["lastname"];
-                    let phone = data[key]["phone"];
-                    table.innerHTML +=`
-                        <tbody id = "employeeTB" class="employeeTB">
-                            <tr>
-                                <td>${id}</td>
-                                <td>${firstName}</td>
-                                <td>${lastName}</td>
-                                <td>${phone}</td>
-                                <td><button id = "deleteBtnId" class = "deleteBtn">Delete</td>
-                            </tr> 
-                        </tbody>
-                    `
-                }
-               /************************* Add Employee Button *************************/
-               function addEmployee(){
+                            <td>${id}</td>
+                            <td>${firstName}</td>
+                            <td>${lastName}</td>
+                            <td>${phone}</td>
+                            <td><button id = "deleteBtnId" class = "deleteBtn">Delete</td>
+                        </tr> 
+                    </tbody>
+                `
+            }
+            /************************* Add Employee Button *************************/
+            function addEmployee(){
                 const addEmployeebtn = document.createElement("button");
                 addEmployee_div.append(addEmployeebtn)
                 addEmployeebtn.innerHTML = "Add Employee";
@@ -196,14 +191,12 @@ function employeeData(submit){
                     } else{
                         form.hidden = true;
                     }               
-               });
-
-               }
-               if (submit === false){
-                addEmployee();
-               }
-               
-            });
+                });
+            }
+            if (submit === false){
+            addEmployee();
+            }
+        });
 }
 
 /************************************************** Submit Employee Info **************************************************/
@@ -290,32 +283,27 @@ function vehicleData(submit){
                             </tr> 
                         </tbody>
                     `
-                    }
-                    
+                    } 
                 }
                 /************************* Add Vehicle Button *************************/
                function addVehicle(){
-                const addVehiclebtn = document.createElement("button");
-                addVehicle_div.append(addVehiclebtn)
-                addVehiclebtn.innerHTML = "Add Vehicle";
-
-                addVehiclebtn.addEventListener("click",(event)=>{ //Click on Add Employee button
-                    //console.log("Add vehicle button is clicked");
-                    const form = document.getElementById("addVehicleForm");
-                    if(form.hidden === true){
-                        form.hidden = false;
-                    } else{
-                        form.hidden = true;
-                    }
-    
-                    
-                   });
+                    const addVehiclebtn = document.createElement("button");
+                    addVehicle_div.append(addVehiclebtn)
+                    addVehiclebtn.innerHTML = "Add Vehicle";
+                    addVehiclebtn.addEventListener("click",(event)=>{ //Click on Add Employee button
+                        //console.log("Add vehicle button is clicked");
+                        const form = document.getElementById("addVehicleForm");
+                        if(form.hidden === true){
+                            form.hidden = false;
+                        } else{
+                            form.hidden = true;
+                        }
+                    });
                }
                if (submit === false){
                 //console.log("value of submit",submit);
                 addVehicle();
                }
-             
             });
 }
 
