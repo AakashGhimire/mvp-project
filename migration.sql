@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS sales;
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS employee;
-
 DROP TABLE IF EXISTS vehicle;
 
 CREATE TABLE customer

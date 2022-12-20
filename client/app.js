@@ -73,12 +73,7 @@ function customerData(submit){
         }
 
        /************************* Add Customer Button *************************/
-       if (submit === false){
-        console.log("value of submit",submit);
-        addCustomer();
-       }
-       
-       //addCustomer() function displays customer entry form
+       //this function displays customer entry form when Add Customer button is clicked
        function addCustomer(){
         const addCustomerbtn = document.createElement("button");
         addCustomer_div.append(addCustomerbtn)
@@ -92,6 +87,11 @@ function customerData(submit){
                 customer_form.hidden = true;
             }
         });
+       }
+       //addCustomer function only displays the entry form if submit is false
+       if (submit === false){
+        //console.log("value of submit",submit);
+        addCustomer();
        }
     });
 }
@@ -128,15 +128,30 @@ var employee_toggled = false;
 displayEmployee.addEventListener("click", ()=>{
     if(!employee_toggled){ //runs when toggle is false for the first time
         employee_toggled = true;
+        let submit = false;
+        employeeData(submit);
+        
+            
+    }   
+    else if(employee_toggled){ //runs when toggle is set to true. this will toggle off the customer table
+        employee_toggled = false;
         const table = document.getElementById("employee_table"); 
+        employee_div.append(table);
+        addEmployee_div.innerHTML= " ";
+        table.innerHTML = " ";
+    }
+});
+
+function employeeData(submit){
+    const table = document.getElementById("employee_table"); 
         employee_div.append(table);
         fetch("/api/employee") //fetches customer api
             .then((res)=>res.json())
             .then((data)=>{
                 console.log(data);
-                const addEmployeebtn = document.createElement("button");
-                addEmployee_div.append(addEmployeebtn)
-                addEmployeebtn.innerHTML = "Add Employee";
+                // const addEmployeebtn = document.createElement("button");
+                // addEmployee_div.append(addEmployeebtn)
+                // addEmployeebtn.innerHTML = "Add Employee";
 
                 //creates table headers for the customers table
                 table.innerHTML = ` 
@@ -168,7 +183,11 @@ displayEmployee.addEventListener("click", ()=>{
                     `
                 }
                /************************* Add Employee Button *************************/
-               addEmployeebtn.addEventListener("click",(event)=>{ //Click on Add Employee button
+               function addEmployee(){
+                const addEmployeebtn = document.createElement("button");
+                addEmployee_div.append(addEmployeebtn)
+                addEmployeebtn.innerHTML = "Add Employee";
+                addEmployeebtn.addEventListener("click",(event)=>{ //Click on Add Employee button
                     console.log("Add button is clicked");
                     //event.preventDefault();
                     const form = document.getElementById("addEmployeeForm");
@@ -178,39 +197,40 @@ displayEmployee.addEventListener("click", ()=>{
                         form.hidden = true;
                     }               
                });
-            });
-            
-    }   
-    else if(employee_toggled){ //runs when toggle is set to true. this will toggle off the customer table
-        employee_toggled = false;
-        const table = document.getElementById("employee_table"); 
-        employee_div.append(table);
-        addEmployee_div.innerHTML= " ";
-        table.innerHTML = " ";
-    }
-});
 
-/************************************************** Update Employee **************************************************/
+               }
+               if (submit === false){
+                addEmployee();
+               }
+               
+            });
+}
+
+/************************************************** Submit Employee Info **************************************************/
 const createEmployee = document.getElementById("addEmployeeForm");
 createEmployee.addEventListener("submit", (event)=>{
     event.preventDefault();
     console.log("submit is clicked");
     const data = new FormData(event.target);
-    //const newCustomer = {first_name: data.get("cust_firstName"), last_name: data.get("last_name"), phone: data.get("phone")}
 
     let firstname = document.getElementById("employee_firstName").value;
     let lastname = document.getElementById("employee_lastName").value;
     let phone = document.getElementById("employee_phone").value;
     const newEmployee = {firstname, lastname, phone}
     console.log(newEmployee);    
-    
+    createEmployee.reset();
     fetch("/api/employee", {
         headers: {
             "Content-Type": "application/json"
         },
         method: "POST",
         body: JSON.stringify(newEmployee)
-    });
+    })
+    .then((res)=>res.json())
+     .then((data)=>{
+        submit = true;
+        employeeData(submit);
+     });
 })
 
 /************************************************** Vehicle Button Functionality **************************************************/
@@ -218,16 +238,25 @@ var vehicle_toggled = false;
 displayVehicle.addEventListener("click", ()=>{
     if(!vehicle_toggled){ //runs when toggle is false for the first time
         vehicle_toggled = true;
+        let submit = false;
+        vehicleData(submit);
+    }   
+    else if(vehicle_toggled){ //runs when toggle is set to true. this will toggle off the customer table
+        vehicle_toggled = false;
         const table = document.getElementById("vehicle_table"); 
         vehicle_div.append(table);
+        addVehicle_div.innerHTML= " ";
+        table.innerHTML = " ";
+    }
+});
+
+function vehicleData(submit){
+    const table = document.getElementById("vehicle_table"); 
+    vehicle_div.append(table);
         fetch("/api/vehicle") //fetches customer api
             .then((res)=>res.json())
             .then((data)=>{
                 console.log(data);
-                const addVehiclebtn = document.createElement("button");
-                addVehicle_div.append(addVehiclebtn)
-                addVehiclebtn.innerHTML = "Add Vehicle";
-
                 //creates table headers for the customers table
                 table.innerHTML = ` 
                     <thead>
@@ -265,29 +294,32 @@ displayVehicle.addEventListener("click", ()=>{
                     
                 }
                 /************************* Add Vehicle Button *************************/
-               addVehiclebtn.addEventListener("click",(event)=>{ //Click on Add Employee button
-                console.log("Add vehicle button is clicked");
-                const form = document.getElementById("addVehicleForm");
-                if(form.hidden === true){
-                    form.hidden = false;
-                } else{
-                    form.hidden = true;
-                }
+               function addVehicle(){
+                const addVehiclebtn = document.createElement("button");
+                addVehicle_div.append(addVehiclebtn)
+                addVehiclebtn.innerHTML = "Add Vehicle";
 
-                
-               });
+                addVehiclebtn.addEventListener("click",(event)=>{ //Click on Add Employee button
+                    console.log("Add vehicle button is clicked");
+                    const form = document.getElementById("addVehicleForm");
+                    if(form.hidden === true){
+                        form.hidden = false;
+                    } else{
+                        form.hidden = true;
+                    }
+    
+                    
+                   });
+               }
+               if (submit === false){
+                //console.log("value of submit",submit);
+                addVehicle();
+               }
+             
             });
-    }   
-    else if(vehicle_toggled){ //runs when toggle is set to true. this will toggle off the customer table
-        vehicle_toggled = false;
-        const table = document.getElementById("vehicle_table"); 
-        vehicle_div.append(table);
-        addVehicle_div.innerHTML= " ";
-        table.innerHTML = " ";
-    }
-});
+}
 
-/************************************************** Update Vehicle **************************************************/
+/************************************************** Submit Vehicle Info **************************************************/
 const createVehicle = document.getElementById("addVehicleForm");
 createVehicle.addEventListener("submit", (event)=>{
     console.log("submit is clicked");
@@ -297,22 +329,22 @@ createVehicle.addEventListener("submit", (event)=>{
     let make = document.getElementById("vehicle_make").value;
     let model = document.getElementById("vehicle_model").value;
     let year = document.getElementById("vehicle_year").value;
-        // for(let i=1990; i<=2023; i++){
-        //     var select = document.getElementById("vehicle_year");
-        //     var option = document.createElement("option");
-        //     select.append(option);
-        //     option.innerHTML = i;
-        //     option.value = i;
-        // }
-    const newVehicle = {make, model, year}
+    let price = document.getElementById("vehicle_price").value;
+    let sold = false;
+    const newVehicle = {make, model, year, price, sold}
     console.log(newVehicle);    
-    
+    createVehicle.reset();
     fetch("/api/vehicle", {
         headers: {
             "Content-Type": "application/json"
         },
         method: "POST",
         body: JSON.stringify(newVehicle)
+    })
+    .then((res)=>res.json())
+    .then((data)=>{
+       submit = true;
+       vehicleData(submit);
     });
 })
 

@@ -3,18 +3,19 @@ import nodemon from "nodemon";
 import postgres from "postgres";
 import dotenv from "dotenv";
 
-//const sql = postgres({database:"dealership"});
-const sql = postgres("postgres://aakashgh:wYxXdSakRmhG8hDdyVqfomhMjrvN7K9r@dpg-ceee19ha6gds30adlp80-a.oregon-postgres.render.com/dealership?ssl=true");
+dotenv.config();
 const app = express();
 const port = 3000;
 
-dotenv.config();
+//const sql = postgres({database:"dealership"});
+const sql = postgres(process.env.DATABASE_URL);
+
 app.use(express.json());
 app.use(express.static("client"));
 
 /************************************************** Get Customers **************************************************/
 app.get("/api/customer", (req, res)=>{
-    sql `select * from customer`
+    sql `select * from customer order by id`
     .then((result)=>{
         res.json(result);
     })
@@ -22,7 +23,7 @@ app.get("/api/customer", (req, res)=>{
 
 /************************************************** Get Employees **************************************************/
 app.get("/api/employee", (req, res)=>{
-    sql `select * from employee`
+    sql `select * from employee order by id`
     .then((result)=>{
         res.json(result);
     })
@@ -30,7 +31,7 @@ app.get("/api/employee", (req, res)=>{
 
 /************************************************** Get Vehicles **************************************************/
 app.get("/api/vehicle", (req, res)=>{
-    sql `select * from vehicle`
+    sql `select * from vehicle order by id`
     .then((result)=>{
         res.json(result);
     })
@@ -50,6 +51,7 @@ app.get("/api/sales", (req, res)=>{
         ON employee.id = sales.employee_id
         JOIN vehicle
         ON vehicle.id = sales.vehicle_id
+        order by sales.id
         `
     .then((result)=>{
         res.json(result);
@@ -82,6 +84,7 @@ app.post("/api/employee", (req, res)=>{
 app.post("/api/vehicle", (req, res)=>{
     sql `INSERT INTO vehicle ${sql(req.body)} RETURNING *`
     .then((results)=>{
+        //console.log("From api ",req.body);
         res.json(results[0]);
     });
 });
