@@ -79,7 +79,7 @@ function customerData(submit){
         addCustomer_div.append(addCustomerbtn)
         addCustomerbtn.innerHTML = "Add Customer";
         addCustomerbtn.addEventListener("click",(event)=>{ //Click on Add Customer button
-            console.log("Add Customer button is clicked");
+            //console.log("Add Customer button is clicked");
             const customer_form = document.getElementById("addCustomerForm");
             if(customer_form.hidden === true){
                 customer_form.hidden = false;
@@ -99,7 +99,7 @@ function customerData(submit){
  /************************* Submit Customer Info *************************/
  const createCustomer = document.getElementById("addCustomerForm");
  createCustomer.addEventListener("submit", (event)=>{
-     console.log("submit is clicked");
+     //console.log("submit is clicked");
      event.preventDefault();
      const data = new FormData(event.target);
      let firstname = document.getElementById("cust_firstName").value;
@@ -188,7 +188,7 @@ function employeeData(submit){
                 addEmployee_div.append(addEmployeebtn)
                 addEmployeebtn.innerHTML = "Add Employee";
                 addEmployeebtn.addEventListener("click",(event)=>{ //Click on Add Employee button
-                    console.log("Add button is clicked");
+                    //console.log("Add button is clicked");
                     //event.preventDefault();
                     const form = document.getElementById("addEmployeeForm");
                     if(form.hidden === true){
@@ -210,14 +210,14 @@ function employeeData(submit){
 const createEmployee = document.getElementById("addEmployeeForm");
 createEmployee.addEventListener("submit", (event)=>{
     event.preventDefault();
-    console.log("submit is clicked");
+    //console.log("submit is clicked");
     const data = new FormData(event.target);
 
     let firstname = document.getElementById("employee_firstName").value;
     let lastname = document.getElementById("employee_lastName").value;
     let phone = document.getElementById("employee_phone").value;
     const newEmployee = {firstname, lastname, phone}
-    console.log(newEmployee);    
+    //console.log(newEmployee);    
     createEmployee.reset();
     fetch("/api/employee", {
         headers: {
@@ -300,7 +300,7 @@ function vehicleData(submit){
                 addVehiclebtn.innerHTML = "Add Vehicle";
 
                 addVehiclebtn.addEventListener("click",(event)=>{ //Click on Add Employee button
-                    console.log("Add vehicle button is clicked");
+                    //console.log("Add vehicle button is clicked");
                     const form = document.getElementById("addVehicleForm");
                     if(form.hidden === true){
                         form.hidden = false;
@@ -322,7 +322,7 @@ function vehicleData(submit){
 /************************************************** Submit Vehicle Info **************************************************/
 const createVehicle = document.getElementById("addVehicleForm");
 createVehicle.addEventListener("submit", (event)=>{
-    console.log("submit is clicked");
+    //console.log("submit is clicked");
     event.preventDefault();
     const data = new FormData(event.target);
 
@@ -332,7 +332,7 @@ createVehicle.addEventListener("submit", (event)=>{
     let price = document.getElementById("vehicle_price").value;
     let sold = false;
     const newVehicle = {make, model, year, price, sold}
-    console.log(newVehicle);    
+    //console.log(newVehicle);    
     createVehicle.reset();
     fetch("/api/vehicle", {
         headers: {
@@ -423,7 +423,8 @@ displayPurchase.addEventListener("click", ()=>{
 
 const createPurchase = document.getElementById("purchaseForm");
 createPurchase.addEventListener("submit", (event)=>{
-    console.log("submit is clicked");
+
+    //console.log("submit is clicked");
     event.preventDefault();
     const data = new FormData(event.target);
 
@@ -432,7 +433,8 @@ createPurchase.addEventListener("submit", (event)=>{
     let vehicle_id = document.getElementById("vehicle_id_purchase").value;
 
     const newPurchase = {employee_id, customer_id, vehicle_id}
-    console.log(newPurchase);    
+    //console.log(newPurchase);    
+    createPurchase.reset();
 
     fetch("/api/sales", {
         headers: {

@@ -97,7 +97,7 @@ app.post("/api/sales", (req, res)=>{
     console.log("Vehicle ID that is sold - ", vehicle_id);
     sql`UPDATE vehicle set sold = 'true' where id = ${vehicle_id}`
     .then((results)=>{
-        console.log("results of updating vehicle table ",results[0]);
+        //console.log("results of updating vehicle table ",results[0]);
     })
 
     sql `INSERT INTO sales ${sql(req.body)} RETURNING *`
