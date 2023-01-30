@@ -472,6 +472,6 @@ createPurchase.addEventListener("submit", (event)=>{
         body: JSON.stringify(newPurchase)
     })
     // .then(()=>{
-    //     alert("Purchase Successful!");
+    //     alert("Purchase Successful!")
     // });
 })
